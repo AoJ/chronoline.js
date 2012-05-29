@@ -97,11 +97,11 @@ function Chronoline(domElement, events, options) {
         startDate: null,  // start of the timeline. Defaults to first event date
         endDate: null,  // end of the timeline. Defauls to the last event date
 
-        visibleSpan: 2592000000,  // in milliseconds,
+        visibleSpan: 2592000000 / 2,  // in milliseconds,
         timelinePadding: 0, // in ms. Adds this much time to the front and back to get some space
 
         topMargin: 40,  // overhead space on the canvas. useful for additional content
-        eventHeight: 5,  // how tall event events are
+        eventHeight: 15,  // how tall event events are
         eventMargin: 4,  // how far apart the events are
         dateLabelHeight: 50, // how tall the bottom margin for the dates is
         hashLength: 4,  // length of the hash marks for the days
@@ -111,9 +111,9 @@ function Chronoline(domElement, events, options) {
 	hashColor: '#b8b8b8',
 
         eventAttrs: {  // attrs for the bars and circles of the events
-            fill: '#0055e1',
-            stroke: '#0055e1',
-            "stroke-width": 2
+            fill: '#cdcdcd',
+            stroke: '#cdcdcd',
+            "stroke-width": 1
         },
 
         // predefined fns include: null (for daily), isFifthDay, isHalfMonth
@@ -376,6 +376,8 @@ function Chronoline(domElement, events, options) {
                     rightCircle.attr(event.attrs);
                 }
                 elem = t.paper.rect(startX, upperY, width, t.eventHeight).attr(t.eventAttrs);
+                if(event.title) var eventInnerTitle = t.paper.text(startX + width / 2, upperY + t.eventHeight / 2, event.title);
+               
             }
 
            if(typeof event.attrs != "undefined"){
